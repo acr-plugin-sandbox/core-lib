@@ -13,6 +13,8 @@ class SessionManager internal constructor(private val store: SessionStore) {
 
     fun current(): Session? = session
 
+    fun isSignedIn(): Boolean = session != null
+
     fun addListener(listener: SessionListener) {
         listeners += listener
     }
