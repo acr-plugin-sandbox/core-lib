@@ -1,5 +1,6 @@
 package com.example.core.session
 
+import android.os.SystemClock
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -10,6 +11,8 @@ class SessionManager internal constructor(private val store: SessionStore) {
 
     @Volatile
     private var session: Session? = null
+
+    private var lastRefreshUptime = 0L
 
     fun current(): Session? = session
 
@@ -30,6 +33,7 @@ class SessionManager internal constructor(private val store: SessionStore) {
 
     fun signOut() {
         session = null
+        lastRefreshUptime = SystemClock.uptimeMillis()
         store.clear()
         listeners.forEach { it.onSessionChanged(null) }
     }
