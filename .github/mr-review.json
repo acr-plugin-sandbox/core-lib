@@ -1,0 +1,5 @@
+{
+  "profile": "library",
+  "publicApi": ["src/main/java/com/example/core/session/**"],
+  "consumers": ["acr-plugin-sandbox/sample-app"]
+}
