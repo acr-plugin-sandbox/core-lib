@@ -34,9 +34,8 @@ class SessionManager internal constructor(private val store: SessionStore) {
         listeners.forEach { it.onSessionChanged(null) }
     }
 
-    /** Raw token for clients that still build their own headers. */
-    @Deprecated("Use an authenticated client instead.")
-    fun legacyToken(): String? = session?.token
+    /** When the current session expires, in epoch milliseconds. */
+    fun expiresAt(): Long? = session?.expiresAtMillis
 
     companion object {
         val instance: SessionManager by lazy { SessionManager(InMemorySessionStore()) }
